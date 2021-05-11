@@ -6,10 +6,10 @@ using WebApiGps.Models;
 
 namespace WebApiGps.IServices
 {
-    interface ILocalizacaoService
+    public interface ILocalizacaoService
     {
         //Retorna lista de localizações
-        IEnumerable<Localizacao> GetLocalizacao();
+        IEnumerable<Localizacao> GetLocalizacaos();
         //Retorna caçamba pelo ID
         Localizacao GetLocalizacaoById(int id);
         //Adiciona nova localizacao

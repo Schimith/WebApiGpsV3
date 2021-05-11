@@ -17,7 +17,7 @@ namespace WebApiGps.Services
             dbContext = _db;
         }
         //Metodo para retornar as localizações
-        public IEnumerable<Localizacao> GetLocalizacao()
+        public IEnumerable<Localizacao> GetLocalizacaos()
         {
             var localizacao = dbContext.Localizacaos.ToList();
             return localizacao;

@@ -17,7 +17,7 @@ namespace WebApiGps.Services
             dbContext = _db;
         }
         //Metodo para retornar as caçambas
-        public IEnumerable<Cacamba> GetCacamba()
+        public IEnumerable<Cacamba> GetCacambas()
         {
             var cacamba = dbContext.Cacambas.ToList();
             return cacamba;

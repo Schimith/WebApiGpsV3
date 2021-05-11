@@ -1,0 +1,83 @@
+﻿@page
+@model WebApiGps.Pages.ApiModel
+@{
+    string host = "https://localhost:44367";
+}
+<style>
+    .Bold {
+        font-weight: bold;
+    }
+</style>
+
+<table border="1">
+    <tbody>
+        <tr>
+            <td> <span class="Bold">Tabela </span> </td>
+            <td> <span class="Bold">URL API </span> </td>
+            <td> <span class="Bold">Metodo </span> </td>
+            <td> <span class="Bold">Funcao </span> </td>
+        </tr>
+        <!--Caçamba-->
+        <tr>
+            <td>Ca&ccedil;amba</td>
+            <td> <a href="@host/api/cacambas">@host/api/cacambas</a> </td>
+            <td> HTTP GET </td>
+            <td> Listagem de registros</td>
+        </tr>
+        <tr>
+            <td>Ca&ccedil;amba</td>
+            <td> <a href="@host/api/cacambas/get?id=1">@host/api/cacambas/get?id=1</a> </td>
+            <td> HTTP GET </td>
+            <td> Busca registro</td>
+        </tr>
+        <tr>
+            <td>Ca&ccedil;amba</td>
+            <td> <a href="@host/api/cacambas/add">@host/api/cacambas/add</a> </td>
+            <td> HTTP POST </td>
+            <td> Adiciona registro</td>
+        </tr>
+        <tr>
+            <td>Ca&ccedil;amba</td>
+            <td> <a href="@host/api/cacambas/edit">@host/api/cacambas/edit</a> </td>
+            <td> HTTP PUT </td>
+            <td> Atualiza registro</td>
+        </tr>
+        <tr>
+            <td>Ca&ccedil;amba</td>
+            <td> <a href="@host/api/cacambas/delete">@host/api/cacambas/delete</a> </td>
+            <td> HTTP DELETE </td>
+            <td> Apaga registro</td>
+        </tr>
+        <!--Localizacao-->
+        <tr>
+            <td>Localiza&ccedil;&atilde;o</td>
+            <td> <a href="@host/api/localizacao">@host/api/localizacao</a> </td>
+            <td> HTTP GET </td>
+            <td> Listagem de registros</td>
+        </tr>
+        <tr>
+            <td>Localiza&ccedil;&atilde;o</td>
+            <td> <a href="@host/api/localizacao/get?id=1">@host/api/localizacao/get?id=1</a> </td>
+            <td> HTTP GET </td>
+            <td> Busca registro</td>
+        </tr>
+        <tr>
+            <td>Localiza&ccedil;&atilde;o</td>
+            <td> <a href="@host/api/localizacao/add">@host/api/localizacao/add</a> </td>
+            <td> HTTP POST </td>
+            <td> Adiciona registro</td>
+        </tr>
+        <tr>
+            <td>Localiza&ccedil;&atilde;o</td>
+            <td> <a href="@host/api/localizacao/edit">@host/api/localizacao/edit</a> </td>
+            <td> HTTP PUT </td>
+            <td> Atualiza registro</td>
+        </tr>
+        <tr>
+            <td>Localiza&ccedil;&atilde;o</td>
+            <td> <a href="@host/api/localizacao/delete">@host/api/localizacao/delete</a> </td>
+            <td> HTTP DELETE </td>
+            <td> Apaga registro</td>
+        </tr>
+    </tbody>
+</table>

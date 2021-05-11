@@ -6,10 +6,10 @@ using WebApiGps.Models;
 
 namespace WebApiGps.IServices
 {
-    interface ICacambaService
+    public interface ICacambaService
     {
         //Retorna lista de caçambas
-        IEnumerable<Cacamba> GetCacamba();
+        IEnumerable<Cacamba> GetCacambas();
         //Retorna caçamba pelo ID
         Cacamba GetCacambaById(int id);
         //Adiciona nova caçamba
