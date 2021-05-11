@@ -8,6 +8,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+//Dependencias
+using WebApiGps.Models;
+using WebApiGps.Services;
+using WebApiGps.IServices;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace WebApiGps
 {
@@ -23,7 +29,20 @@ namespace WebApiGps
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //WebPage Default
             services.AddRazorPages();
+
+            //API
+            services.AddControllers();
+            services.AddHttpClient();
+            services.AddDbContext<EMPRESAContext>(options =>
+                     options.UseSqlServer(Configuration["DbConnection"]));
+
+            //Caçambas
+            services.AddTransient<ICacambaService, CacambaService>();
+            //Localização
+            services.AddTransient<ILocalizacaoService, LocalizacaoService>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,7 +68,10 @@ namespace WebApiGps
 
             app.UseEndpoints(endpoints =>
             {
+                //WebPage Default
                 endpoints.MapRazorPages();
+                //API
+                endpoints.MapControllers();
             });
         }
     }
