@@ -1,10 +1,10 @@
 ﻿@page
 @model WebApiGps.Pages.LocalizacaoModel
 @{
-    ViewBag.Title = "Localiza&ccedil;&atilde;o";
+    ViewBag.Title = "Hist&oacute;rico Localiza&ccedil;&atilde;o";
 }
 
-<h2> Ca&ccedil;ambas </h2>
+<h2> Hist&oacute;rico Localiza&ccedil;&atilde;o </h2>
 
 <div id="gridEmployee" style="margin:20px auto;"></div>
 
@@ -17,19 +17,21 @@
 
     <script type="text/javascript">
 
-        $(document).ready(function () {
+        $(document).ready(function () {                        
 
             // In this part, you need to prepare your data
-            var source =
+            var source =            
             {
                 datatype: "json",
 
                 // Here you will declare all fields that must be used in the grid
                 datafields: [
 
+                    { name: 'id', type: 'number' },
                     { name: 'codCacamba', type: 'number' },
                     { name: 'coordenadas', type: 'string' },
-                    { name: 'criadoEm', type: 'string' }
+                    { name: 'criadoEm', type: 'string' },
+                    { name: 'link', type: 'string' },
 
                 ],
                 // call the action which retrieve data employees in json format
@@ -48,10 +50,11 @@
 
                     columns: [
 
+                        { text: "Registro", datafield: "id" },
                         { text: "ID Ca&ccedil;amba", datafield: "codCacamba" },
                         { text: "Coordenadas", datafield: "coordenadas" },
                         { text: "Data Registro GPS", datafield: "criadoEm" }
-
+                        
                     ]
                 });
         });
