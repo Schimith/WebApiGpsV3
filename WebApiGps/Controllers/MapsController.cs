@@ -31,9 +31,10 @@ namespace WebApiGps.Controllers
                     while (sdr.Read())
                     {
                         markers += "{";
-                        markers += string.Format("'id': '{0}',", sdr["COD_CACAMBA"]);
-                        markers += string.Format("'coordenadas': '{0}',", sdr["COORDENADAS"]);
-                        markers += string.Format("'criado_em': '{0}',", sdr["CRIADO_EM"]);                        
+                        markers += string.Format("'title': '{0}',", sdr["COD_CACAMBA"]);
+                        markers += string.Format("'lat': '{0}',", sdr["LATITUDE"]);
+                        markers += string.Format("'lng': '{0}',", sdr["LONGITUDE"]);
+                        markers += string.Format("'description': '{0}',", sdr["CRIADO_EM"]);                        
                         markers += "},";
                     }
                 }

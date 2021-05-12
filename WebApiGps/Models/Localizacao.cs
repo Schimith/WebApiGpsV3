@@ -9,7 +9,8 @@ namespace WebApiGps.Models
     {
         public int Id { get; set; }
         public int? CodCacamba { get; set; }
-        public string Coordenadas { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
         public DateTime? CriadoEm { get; set; }
 
         public virtual Cacamba CodCacambaNavigation { get; set; }

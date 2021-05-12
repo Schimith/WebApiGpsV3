@@ -24,8 +24,8 @@ namespace WebApiGps.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-               //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-               //optionsBuilder.UseSqlServer("Server=DESKTOP-5A8O62Q; Database=EMPRESA; User ID=app;Password=123456;");
+                //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                //optionsBuilder.UseSqlServer("Server=DESKTOP-5A8O62Q; Database=EMPRESA; User ID=app;Password=123456;");
             }
         }
 
@@ -52,14 +52,18 @@ namespace WebApiGps.Models
 
                 entity.Property(e => e.CodCacamba).HasColumnName("COD_CACAMBA");
 
-                entity.Property(e => e.Coordenadas)
-                    .IsRequired()
-                    .HasColumnName("COORDENADAS");
-
                 entity.Property(e => e.CriadoEm)
                     .HasColumnType("datetime")
                     .HasColumnName("CRIADO_EM")
                     .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Latitude)
+                    .IsRequired()
+                    .HasColumnName("LATITUDE");
+
+                entity.Property(e => e.Longitude)
+                    .IsRequired()
+                    .HasColumnName("LONGITUDE");
 
                 entity.HasOne(d => d.CodCacambaNavigation)
                     .WithMany(p => p.Localizacaos)
