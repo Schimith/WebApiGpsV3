@@ -1,10 +1,10 @@
 ﻿@page
-@model WebApiGps.Pages.LocalizacaoModel
+@model WebApiGps.Pages.LocationModel
 @{
-    ViewBag.Title = "Hist&oacute;rico Localiza&ccedil;&atilde;o";
+    ViewBag.Title = "Localizacoes";
 }
 
-<h2> Hist&oacute;rico Localiza&ccedil;&atilde;o </h2>
+<h2> Localiza&ccedil;&otilde;es </h2>
 
 <div id="gridEmployee" style="margin:20px auto;"></div>
 
@@ -28,15 +28,14 @@
                 datafields: [
 
                     { name: 'id', type: 'number' },
-                    { name: 'codCacamba', type: 'number' },
+                    { name: 'name', type: 'string' },
                     { name: 'latitude', type: 'string' },
                     { name: 'longitude', type: 'string' },
-                    { name: 'criadoEm', type: 'string' },
-                    { name: 'link', type: 'string' },
+                    { name: 'createdAt', type: 'string' },                    
 
                 ],
                 // call the action which retrieve data employees in json format
-                url: '/api/localizacao'
+                url: '/api/location'
             };
 
             var dataAdapter = new $.jqx.dataAdapter(source);
@@ -44,18 +43,18 @@
             // displaying data in the grid with jqxGrid
             $("#gridEmployee").jqxGrid(
                 {
-                    width: 800,
+                    width: 1000,
                     source: dataAdapter,
                     pageable: true,
                     sortable: true,
 
                     columns: [
 
-                        { text: "Registro", datafield: "id" },
-                        { text: "ID Ca&ccedil;amba", datafield: "codCacamba" },
+                        { text: "ID", datafield: "id" },
+                        { text: "Nome", datafield: "name" },
                         { text: "Latitude", datafield: "latitude" },
                         { text: "Longitude", datafield: "longitude" },
-                        { text: "Data Registro GPS", datafield: "criadoEm" }
+                        { text: "Data Registro GPS", datafield: "createdAt" }
                         
                     ]
                 });

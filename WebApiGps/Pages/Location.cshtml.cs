@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace WebApiGps.Pages
 {
-    public class LocalizacaoModel : PageModel
+    public class LocationModel : PageModel
     {
         public void OnGet()
         {

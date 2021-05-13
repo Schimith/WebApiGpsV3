@@ -1,0 +1,54 @@
+﻿@page
+@model WebApiGps.Pages.MapsModel
+@{
+}
+
+<!DOCTYPE html>
+<html>
+  <head>
+   <title>Dubai Hotels</title>
+  </head>
+
+  <body onload="loadMap()">      
+      <div id="map" style="width:1360px; height:768px;"></div>
+      <script>
+
+          // fake JSON call
+          function getJSONMarkers() {
+              const markers = [{ name: "Caçamba 01", lat: -20.324715, lng: -40.3727698, description: "teste" }, { name: "Caçamba 02", lat: -20.330446, lng: -40.3608367, description: "teste" }, { name: "Caçamba 03", lat: -20.3337846, lng: -40.3804134, description: "teste" }]
+              return markers
+          }
+
+          function loadMap() {
+              // Initialize Google Maps
+              const mapOptions = {
+                  center: new google.maps.LatLng(-20.3184424, -40.3595609),
+                  zoom: 14
+              }
+              const map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+              // Load JSON Data
+              const hotelMarkers = getJSONMarkers();
+
+              //Info Window - Description
+              var infoWindow = new google.maps.InfoWindow();
+
+              // Initialize Google Markers
+              for (hotel of hotelMarkers) {
+                  let marker = new google.maps.Marker({
+                      map: map,
+                      position: new google.maps.LatLng(hotel.lat, hotel.lng),
+                      title: hotel.name
+                  });
+                  (function (marker, hotel) { //here city map description after click on it.
+                      google.maps.event.addListener(marker, "click", function (e) {
+                          infoWindow.setContent(hotel.description); //city description value
+                          infoWindow.open(map, marker); //then pop will show  the description
+                      });
+                  })(marker, hotel);
+              }
+          }
+      </script>
+      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=API_KEY"></script> @*api key after sign in your google account.*@
+  </body>
+</html>

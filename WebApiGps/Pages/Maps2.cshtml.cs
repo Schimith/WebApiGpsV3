@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace WebApiGps.Pages
 {
-    public class CacambaModel : PageModel
+    public class Maps2Model : PageModel
     {
         public void OnGet()
         {
         }
+
     }
 }

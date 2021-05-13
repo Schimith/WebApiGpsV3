@@ -17,15 +17,14 @@ namespace WebApiGps.Models
         {
         }
 
-        public virtual DbSet<Cacamba> Cacambas { get; set; }
-        public virtual DbSet<Localizacao> Localizacaos { get; set; }
+        public virtual DbSet<Location> Locations { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                //optionsBuilder.UseSqlServer("Server=DESKTOP-5A8O62Q; Database=EMPRESA; User ID=app;Password=123456;");
+                #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=DESKTOP-5A8O62Q; Database=EMPRESA; User ID=app;Password=123456;");
             }
         }
 
@@ -33,28 +32,15 @@ namespace WebApiGps.Models
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Latin1_General_CI_AS");
 
-            modelBuilder.Entity<Cacamba>(entity =>
+            modelBuilder.Entity<Location>(entity =>
             {
-                entity.ToTable("CACAMBA");
-
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("ID");
-
-                entity.Property(e => e.Nome).HasColumnName("NOME");
-            });
-
-            modelBuilder.Entity<Localizacao>(entity =>
-            {
-                entity.ToTable("LOCALIZACAO");
+                entity.ToTable("LOCATION");
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.CodCacamba).HasColumnName("COD_CACAMBA");
-
-                entity.Property(e => e.CriadoEm)
+                entity.Property(e => e.CreatedAt)
                     .HasColumnType("datetime")
-                    .HasColumnName("CRIADO_EM")
+                    .HasColumnName("CREATED_AT")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Latitude)
@@ -65,10 +51,7 @@ namespace WebApiGps.Models
                     .IsRequired()
                     .HasColumnName("LONGITUDE");
 
-                entity.HasOne(d => d.CodCacambaNavigation)
-                    .WithMany(p => p.Localizacaos)
-                    .HasForeignKey(d => d.CodCacamba)
-                    .HasConstraintName("FK_LOCACAO");
+                entity.Property(e => e.Name).HasColumnName("NAME");
             });
 
             OnModelCreatingPartial(modelBuilder);

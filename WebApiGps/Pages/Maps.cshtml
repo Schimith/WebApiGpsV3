@@ -1,50 +1,66 @@
 ﻿@page
 @model WebApiGps.Pages.MapsModel
-
 @{
-    ViewBag.Title = "Satyaprakash Metro City Google Map";
-    System.Console.WriteLine(Html.Raw(ViewBag.Markers));
+    //Host API
+    string host = "https://localhost:44367";
 }
 
-<title>@ViewBag.Title</title> //The Title will show Here.
+<!DOCTYPE html>
+<html>
 
-<h2 style="background-color: Yellow;color: Blue; text-align: center; font-style: oblique">Satyaprakash Google Map Using Asp.net MVC</h2>
-<fieldset>
-    <legend style="font-family: Arial Black; color: blue; font-size: large;">Check Metro City Using Google Map</legend>
-    <div id="SatyaMap" style="width: 1240px; height: 400px;">
-        @*set google map size .*@
-    </div>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=API_KEY"></script> @*api key after sign in your google account.*@
-    <script type="text/javascript">
+<head>    
+   
+</head>
 
-        var markers = @Html.Raw(ViewBag.Markers); //all string value of column properties to viewbag.
-        window.onload = function () {
+<body onload="loadMap()">
+
+    <div id="map" style="width:1360px; height:768px;"></div>
+
+    <script>
+        function loadMap() {
+            var center = new google.maps.LatLng(-20.3184424, -40.3595609);  //which city will be shown.
             var mapOptions = {
-                center: new google.maps.LatLng(markers[3].lat, markers[3].lng), //which city will be shown.
-                zoom: 9, //google map page zoom
-                mapTypeId: google.maps.MapTypeId.ROADMAP //type of view.
+                zoom: 14,
+                center: center,
+                mapTypeId: google.maps.MapTypeId.roadmap //Map style
             };
+
+            var map = new google.maps.Map(document.getElementById('map'), mapOptions); //pass div id and google map load values.
+            loadMarkers(map); //here load all objects in API/JSON
+        }
+
+
+        function loadMarkers(map) {
+            //Info Window - Description
             var infoWindow = new google.maps.InfoWindow();
-            var map = new google.maps.Map(document.getElementById("SatyaMap"), mapOptions);//pass div id and google map load values.
-            for (i = 0; i < markers.length; i++) { //here load all city map name
-                var data = markers[i]
-                var myLatlng = new google.maps.LatLng(data.lat, data.lng); //here i assigned lat and long.
-                var marker = new google.maps.Marker({
-                    position: myLatlng, //lat and long value
-                    map: map, //div id
-                    title: data.title //city name
-                });
-                (function (marker, data) { //here city map description after click on it.
-                    google.maps.event.addListener(marker, "click", function (e) {
-                        infoWindow.setContent(data.description); //city description value
-                        infoWindow.open(map, marker); //then pop will show  the description
+
+            //API URL
+            $.getJSON("@host/api/location",
+                {
+                    format: "json"
+                })
+                .done(function (json) {
+                    $.each(json, function (key, data) {
+                        var latLng = new google.maps.LatLng(data.latitude, data.longitude); //here i assigned lat and long.
+                        // Creating a marker and putting it on the map
+                        var marker = new google.maps.Marker({
+                            position: latLng, //lat and long value
+                            map: map, //div id
+                            title: data.name //object name
+                        });
+                        console.log(data); //Debug to console
+                        (function (marker, data) { //here city map description after click on it.
+                            google.maps.event.addListener(marker, "click", function (e) {
+                                infoWindow.setContent("<font size = 3>" + "ID: " + data.id + "</br>Nome : "+ data.name +"</br>Coleta GPS: "+ data.createdAt + "</font>"); //objects of API in description box
+                                infoWindow.open(map, marker); //then pop will show the description
+                            });
+                        })(marker, data);
                     });
-                })(marker, data);
-            }
+                });
         }
     </script>
-</fieldset>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=API_KEY"></script> @*api key after sign in your google account.*@
+</body>
 
-<footer>
-    <p style="background-color: Yellow; font-weight: bold; color:blue; text-align: center; font-style: oblique">© @DateTime.Now.ToLocalTime()</p> @*Add Date Time*@
-</footer> 
+</html >

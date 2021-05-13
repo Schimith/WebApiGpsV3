@@ -38,10 +38,8 @@ namespace WebApiGps
             services.AddDbContext<EMPRESAContext>(options =>
                      options.UseSqlServer(Configuration["DbConnection"]));
 
-            //Caçambas
-            services.AddTransient<ICacambaService, CacambaService>();
             //Localização
-            services.AddTransient<ILocalizacaoService, LocalizacaoService>();
+            services.AddTransient<ILocationService, LocationService>();
             
         }
 
