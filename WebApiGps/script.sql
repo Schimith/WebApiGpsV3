@@ -50,10 +50,29 @@ INSERT INTO LOCATION(NAME,LATITUDE,LONGITUDE) VALUES ('CAÇAMBA 04','-20.3408405
 INSERT INTO LOCATION(NAME,LATITUDE,LONGITUDE) VALUES ('CAÇAMBA 05','-20.3437137','-40.4020194');
 
 --Testes
---Update CAÇAMBA 01 para o Estadio Kleber Andrade
+--Update CAÇAMBA 01 para a localização Estadio Kleber Andrade
 UPDATE LOCATION 
 SET LATITUDE = '-20.334162', LONGITUDE= '-40.3854727'
 WHERE ID = '1';
 
+--Update CAÇAMBA 01 para a localização Ifes Cariacica
+UPDATE LOCATION 
+SET LATITUDE = '-20.324715', LONGITUDE= '-40.3727698'
+WHERE ID = '1';
+
+
 
 SELECT * FROM LOCATION;
+
+
+USE EMPRESA
+--Trigger para atualização automática do campo created_at após update
+CREATE TRIGGER trgAfterUpdate ON LOCATION
+AFTER UPDATE 
+AS
+  UPDATE L set CREATED_AT=GETDATE() 
+  FROM 
+  LOCATION AS L 
+  INNER JOIN inserted
+  AS i 
+  ON L.ID = i.ID;

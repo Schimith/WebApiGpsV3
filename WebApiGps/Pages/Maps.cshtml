@@ -1,8 +1,6 @@
 ﻿@page
 @model WebApiGps.Pages.MapsModel
 @{
-    //Host API
-    string host = "https://localhost:44367";
 }
 
 <!DOCTYPE html>
@@ -18,7 +16,7 @@
 
     <script>
         function loadMap() {
-            var center = new google.maps.LatLng(-20.3184424, -40.3595609);  //which city will be shown.
+            var center = new google.maps.LatLng(-20.3184424, -40.3595609);  //which city will be shown (Grande Vitoria/ES).
             var mapOptions = {
                 zoom: 14,
                 center: center,
@@ -35,7 +33,7 @@
             var infoWindow = new google.maps.InfoWindow();
 
             //API URL
-            $.getJSON("@host/api/location",
+            $.getJSON("/api/location",
                 {
                     format: "json"
                 })
@@ -46,12 +44,13 @@
                         var marker = new google.maps.Marker({
                             position: latLng, //lat and long value
                             map: map, //div id
-                            title: data.name //object name
+                            title: data.name, //object name
+                            icon: '/img/caçamba.png' //null = default icon google
                         });
                         console.log(data); //Debug to console
                         (function (marker, data) { //here city map description after click on it.
                             google.maps.event.addListener(marker, "click", function (e) {
-                                infoWindow.setContent("<font size = 3>" + "ID: " + data.id + "</br>Nome : "+ data.name +"</br>Coleta GPS: "+ data.createdAt + "</font>"); //objects of API in description box
+                                infoWindow.setContent("<font size = 2>" + "ID: " + data.id + "</br>Nome : "+ data.name +"</br>Coleta GPS: "+ data.createdAt + "</font>"); //objects of API in description box
                                 infoWindow.open(map, marker); //then pop will show the description
                             });
                         })(marker, data);

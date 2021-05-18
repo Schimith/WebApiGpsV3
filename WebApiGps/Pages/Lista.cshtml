@@ -1,0 +1,30 @@
+﻿@page
+@model WebApiGps.Pages.ListaModel
+@{
+}
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Criado em</th>
+    </tr>
+    @foreach (var item in Model.Locations)
+    {
+<tr>
+    <td>@item.Id</td>
+    <td>@item.Name</td>
+    <td>@item.Latitude</td>
+    <td>@item.Longitude</td>
+    <td>@item.CreatedAt</td>
+</tr>
+    }
+</table>
+
+
+
+
+
+
