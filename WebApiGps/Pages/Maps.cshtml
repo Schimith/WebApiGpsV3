@@ -50,7 +50,7 @@
                         console.log(data); //Debug to console
                         (function (marker, data) { //here city map description after click on it.
                             google.maps.event.addListener(marker, "click", function (e) {
-                                infoWindow.setContent("<font size = 2>" + "ID: " + data.id + "</br>Nome : "+ data.name +"</br>Coleta GPS: "+ data.createdAt + "</font>"); //objects of API in description box
+                                infoWindow.setContent("<font size = 2>" + "ID: " + data.id + "</br>Nome : " + data.name + "</br>Coordenadas : " + data.latitude + "," + data.longitude + "</br>Coleta GPS: " + data.createdAt + "</font>"); //objects of API in description box
                                 infoWindow.open(map, marker); //then pop will show the description
                             });
                         })(marker, data);
